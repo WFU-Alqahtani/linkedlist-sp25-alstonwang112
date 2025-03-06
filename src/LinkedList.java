@@ -31,7 +31,6 @@ public class LinkedList {
             System.out.print(curr.data + " ");
             curr = curr.next;
         }
-
         System.out.println();
 
         System.out.print("Enter the x that you would like to delete: ");
@@ -51,40 +50,32 @@ public class LinkedList {
 
         curr = head;
         Node prev = head;
+        // At the start of the while-loop, Nodes prev and curr are both the head.
 
         while (curr != null) {
-            if (curr.data == x) {
-                if (prev == head) {
-                    head = head.next;
+            if (curr.data == x) { // Checks if the integer stored in curr matches x.
+                if (curr == head) { // Special case of deleting the head.
+                    head = head.next; // Reassigns the Node after the current head as the new head.
                 } else {
-                    prev.next = curr.next;
-                    curr.next = null;
+                    prev.next = curr.next; // Reassigns the previous Node's reference to the next Node.
+                    curr.next = null; // Gets rid of the current Node.
                 }
-                break;
-            }
-            prev = curr;
-            curr = curr.next;
+                break; // Exits the loop once
+            } // If the integer stored in curr doesn't match x, we move on.
+            prev = curr; // The next loop's prev will be this loop's curr.
+            curr = curr.next; // The next loop's curr will be this loop's curr.next.
         } // Deletes x of the user's choice.
 
-        curr = head;
-        while (curr != null) {
-            System.out.print(curr.data + " ");
-            curr = curr.next;
-        } // Prints out the content of the LinkedList.
-
-        System.out.println();
-
-        /*
 
         head = head.next; // Deletes the head.
 
         curr = head;
-        while (curr != null) {
-            prev = curr;
-            curr = curr.next;
-            if (curr == null) {
-                prev.next = null;
+        while (curr.next != null) {
+            if (curr.next.next == null) {
+                curr.next = null;
+                break;
             }
+            curr = curr.next;
         } // Deletes the last Node.
 
         curr = head;
@@ -95,9 +86,7 @@ public class LinkedList {
 
         System.out.println();
 
-        Node temp = head;
-        head.data = 20;
-        head.next = temp;
+        head = new Node(20, head);
         // Inserts Node with item 20 at the head.
 
         curr = head;
@@ -112,22 +101,14 @@ public class LinkedList {
 
         curr = head;
         int count = 0;
-        while (curr != null && count < 4) {
-            prev = curr;
-            if (count == 3) {
-                prev = new Node(60, curr.next);
-            } else {
-                curr = curr.next;
+        while (curr != null && count < 3) {
+            if (count == 2) {
+                curr.next = new Node(60, curr.next);
+                break;
             }
+            curr = curr.next;
             count++;
         } // Inserts Node with item 60 as the fourth Node.
-
-        curr = head;
-        while (curr != null) {
-            System.out.print(curr.data + " ");
-            curr = curr.next;
-        } // Prints out the content of the LinkedList.
-         */
     }
 
 }
